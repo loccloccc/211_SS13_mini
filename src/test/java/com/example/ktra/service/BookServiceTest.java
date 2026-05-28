@@ -1,3 +1,4 @@
+
 package com.example.ktra.service;
 
 import com.example.ktra.exception.ResourceNotFoundException;
@@ -157,8 +158,11 @@ public class BookServiceTest {
 
         assertThrows(
                 ResourceNotFoundException.class,
-                () -> bookService.deleteBook(1L)
+                () -> bookService.getBookById(1L)
         );
+
+        verify(bookRepository, times(1))
+                .findById(1L);
 
         verify(bookRepository, never())
                 .delete(any(Book.class));
